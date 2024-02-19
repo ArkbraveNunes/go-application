@@ -7,6 +7,7 @@ import (
 )
 
 func initRoutes(router *gin.Engine) {
+	handler.InitHandler()
 	routerGroupV1 := router.Group("/api/v1")
 
 	routePrefixOpening := "/opening"

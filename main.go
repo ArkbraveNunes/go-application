@@ -1,8 +1,8 @@
 package main
 
 import (
-	config "application-openings/config"
-	router "application-openings/router"
+	"application-openings/config"
+	"application-openings/router"
 )
 
 var (
