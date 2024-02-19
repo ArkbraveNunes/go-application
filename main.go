@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	router.Initialize()
+	router.InitRouter()
 }
