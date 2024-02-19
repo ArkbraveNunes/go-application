@@ -1,5 +1,9 @@
 package main
 
+import (
+	router "application-openings/router"
+)
+
 func main() {
-	print("GO APPLICATION OPENINGS INIT")
+	router.Initialize()
 }
