@@ -10,7 +10,7 @@ import (
 func InitMySQL() (*gorm.DB, error) {
 	logger := GetLogger("mySQL")
 
-	db, err := gorm.Open(mysql.Open("local:local@tcp(localhost:3306)/application-openings"), &gorm.Config{})
+	db, err := gorm.Open(mysql.Open("local:local@tcp(localhost:3306)/application-openings?parseTime=true"), &gorm.Config{})
 
 	if err != nil {
 		logger.ErrorWithValues("mysql database opening error: %v", err)
