@@ -1,12 +1,9 @@
 package handler
 
 import (
+	"application-openings/schema"
 	"fmt"
 )
-
-func validateError(name, dataType string) error {
-	return fmt.Errorf("param : %s (type: %s) is required", name, dataType)
-}
 
 type CreateOpeningRequestInput struct {
 	Role     string `json:"role"`
@@ -17,27 +14,32 @@ type CreateOpeningRequestInput struct {
 	Salary   int64  `json:"salary"`
 }
 
+type CreateOpeningRequestOutput struct {
+	Message string `json:"message"`
+	Data    schema.OpeningResponse
+}
+
 func (input *CreateOpeningRequestInput) Validate() error {
 	if input.Role == "" && input.Company == "" && input.Location == "" && input.Link == "" && input.Remote == nil && input.Salary <= 0 {
 		return fmt.Errorf("Request body is invalid format")
 	}
 	if input.Role == "" {
-		return validateError("role", "string")
+		return formatOutputErrorMessage("role", "string")
 	}
 	if input.Company == "" {
-		return validateError("company", "string")
+		return formatOutputErrorMessage("company", "string")
 	}
 	if input.Location == "" {
-		return validateError("location", "string")
+		return formatOutputErrorMessage("location", "string")
 	}
 	if input.Link == "" {
-		return validateError("link", "string")
+		return formatOutputErrorMessage("link", "string")
 	}
 	if input.Remote == nil {
-		return validateError("remote", "boolean")
+		return formatOutputErrorMessage("remote", "boolean")
 	}
 	if input.Salary <= 0 {
-		return validateError("salary", "int64")
+		return formatOutputErrorMessage("salary", "int64")
 	}
 
 	return nil
