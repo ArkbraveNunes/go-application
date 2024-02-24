@@ -1,0 +1,109 @@
+definitions:
+  schema.OpeningResponse:
+    properties:
+      company:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        type: string
+      id:
+        type: integer
+      link:
+        type: string
+      location:
+        type: string
+      remote:
+        type: boolean
+      role:
+        type: string
+      salary:
+        type: integer
+      updatedAt:
+        type: string
+    type: object
+  service.ErrorOutput:
+    properties:
+      message:
+        type: string
+      statusCode:
+        type: string
+    type: object
+  service.OpeningCreateInput:
+    properties:
+      company:
+        type: string
+      link:
+        type: string
+      location:
+        type: string
+      remote:
+        type: boolean
+      role:
+        type: string
+      salary:
+        type: integer
+    type: object
+  service.OpeningCreateOutput:
+    properties:
+      data:
+        $ref: '#/definitions/schema.OpeningResponse'
+      message:
+        type: string
+    type: object
+  service.OpeningUpdateInput:
+    properties:
+      company:
+        type: string
+      link:
+        type: string
+      location:
+        type: string
+      remote:
+        type: boolean
+      role:
+        type: string
+      salary:
+        type: integer
+    type: object
+  service.OpeningUpdateOutput:
+    properties:
+      data:
+        $ref: '#/definitions/schema.OpeningResponse'
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /opening:
+    post:
+      consumes:
+      - application/json
+      description: Update job opening
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/service.OpeningUpdateInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/service.OpeningUpdateOutput'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/service.ErrorOutput'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/service.ErrorOutput'
+      summary: Update opening
+      tags:
+      - Openings
+swagger: "2.0"
