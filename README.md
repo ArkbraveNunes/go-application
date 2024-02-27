@@ -3,6 +3,24 @@
 Olá, bom dia, aqui será apresentado uma documentação relativa a estrutura implementada nessa aplicação go, o objetivo dessa documentação é expôr de maneira clara e objetiva o funcionamento da aplicação bem como sua estrutura.
 O padrão implementado aqui segue conceitos como Clean Code, Clean Architecture, SOLID, DRY, KISS e Design Patterns. Essa documentação também tem correlação ao [Layout Padrão de Projetos em Go](https://github.com/golang-standards/project-layout/blob/master/README_ptBR.md) seguindo os modelos estipulados de diretórios.
 
+## IMPORTANTE
+
+Caso tenha algum problema em rodar qualquer um dos projetos rode o comando
+
+```shell
+make install
+```
+
+assim todos os pacotes go serão atualizados ou instalados, caso não use o make pode instalar de maneira manual usando o go
+
+```shell
+go mod tidy
+```
+
+## Swagger
+
+Rota do swagger de todas as aplicações é sempre o virtual host definido no docker-compose dentro da pasta .docker do [docker-development](https://github.com/ArkbraveNunes/docker-development.git) com o sufixo "/docs/index.html" no final!
+
 ## Estrutura
 
 O Projeto segue o seguinte modelo de orgranização de arquivos e pastas:
