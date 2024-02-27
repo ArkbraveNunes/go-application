@@ -51,6 +51,29 @@ definitions:
       message:
         type: string
     type: object
+  service.OpeningDeleteOutput:
+    properties:
+      data:
+        $ref: '#/definitions/schema.OpeningResponse'
+      message:
+        type: string
+    type: object
+  service.OpeningFindOutput:
+    properties:
+      data:
+        $ref: '#/definitions/schema.OpeningResponse'
+      message:
+        type: string
+    type: object
+  service.OpeningListOutput:
+    properties:
+      data:
+        items:
+          $ref: '#/definitions/schema.OpeningResponse'
+        type: array
+      message:
+        type: string
+    type: object
   service.OpeningUpdateInput:
     properties:
       company:
@@ -77,11 +100,95 @@ info:
   contact: {}
 paths:
   /opening:
+    delete:
+      consumes:
+      - application/json
+      description: Delete job opening
+      parameters:
+      - description: Opening id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/service.OpeningDeleteOutput'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/service.ErrorOutput'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/service.ErrorOutput'
+      summary: Delete opening
+      tags:
+      - Openings
+    get:
+      consumes:
+      - application/json
+      description: Find List Openings
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/service.OpeningListOutput'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/service.ErrorOutput'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/service.ErrorOutput'
+      summary: List Openings
+      tags:
+      - Openings
     post:
+      consumes:
+      - application/json
+      description: Create a new job opening
+      parameters:
+      - description: Request body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/service.OpeningCreateInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/service.OpeningCreateOutput'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/service.ErrorOutput'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/service.ErrorOutput'
+      summary: Create opening
+      tags:
+      - Openings
+    put:
       consumes:
       - application/json
       description: Update job opening
       parameters:
+      - description: Opening id
+        in: path
+        name: id
+        required: true
+        type: integer
       - description: Request body
         in: body
         name: request

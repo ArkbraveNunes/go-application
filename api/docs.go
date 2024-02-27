@@ -16,7 +16,40 @@ const docTemplate = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/opening": {
-            "post": {
+            "get": {
+                "description": "Find List Openings",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Openings"
+                ],
+                "summary": "List Openings",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/service.OpeningListOutput"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/service.ErrorOutput"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/service.ErrorOutput"
+                        }
+                    }
+                }
+            },
+            "put": {
                 "description": "Update job opening",
                 "consumes": [
                     "application/json"
@@ -29,6 +62,13 @@ const docTemplate = `{
                 ],
                 "summary": "Update opening",
                 "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Opening id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
                     {
                         "description": "Request body",
                         "name": "request",
@@ -44,6 +84,92 @@ const docTemplate = `{
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/service.OpeningUpdateOutput"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/service.ErrorOutput"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/service.ErrorOutput"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Create a new job opening",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Openings"
+                ],
+                "summary": "Create opening",
+                "parameters": [
+                    {
+                        "description": "Request body",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/service.OpeningCreateInput"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/service.OpeningCreateOutput"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/service.ErrorOutput"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/service.ErrorOutput"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete job opening",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Openings"
+                ],
+                "summary": "Delete opening",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Opening id",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/service.OpeningDeleteOutput"
                         }
                     },
                     "400": {
@@ -137,6 +263,42 @@ const docTemplate = `{
             "properties": {
                 "data": {
                     "$ref": "#/definitions/schema.OpeningResponse"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "service.OpeningDeleteOutput": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/schema.OpeningResponse"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "service.OpeningFindOutput": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "$ref": "#/definitions/schema.OpeningResponse"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "service.OpeningListOutput": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/schema.OpeningResponse"
+                    }
                 },
                 "message": {
                     "type": "string"
