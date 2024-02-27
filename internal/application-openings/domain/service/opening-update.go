@@ -14,11 +14,12 @@ import (
 // @Tags Openings
 // @Accept json
 // @Produce json
+// @Param id path int	true "Opening id"
 // @Param request body OpeningUpdateInput true "Request body"
 // @Success 200 {object} OpeningUpdateOutput
 // @Failure 400 {object} ErrorOutput
 // @Failure 500 {object} ErrorOutput
-// @Router /opening [post]
+// @Router /opening [put]
 func OpeningUpdateService(ctx *gin.Context) {
 	id := ctx.Query("id")
 	if id == "" {

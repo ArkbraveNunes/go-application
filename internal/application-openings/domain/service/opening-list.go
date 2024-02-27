@@ -7,6 +7,16 @@ import (
 	gin "github.com/gin-gonic/gin"
 )
 
+// @BasePath /api/v1
+// @Summary List Openings
+// @Description Find List Openings
+// @Tags Openings
+// @Accept json
+// @Produce json
+// @Success 200 {object} OpeningListOutput
+// @Failure 400 {object} ErrorOutput
+// @Failure 500 {object} ErrorOutput
+// @Router /opening [get]
 func OpeningListHandler(ctx *gin.Context) {
 	openings := []schema.Opening{}
 
@@ -16,4 +26,9 @@ func OpeningListHandler(ctx *gin.Context) {
 	}
 
 	outputSuccessFormat(ctx, "list-openings", openings)
+}
+
+type OpeningListOutput struct {
+	Message string `json:"message"`
+	Data    []schema.OpeningResponse
 }
